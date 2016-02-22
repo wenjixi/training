@@ -1,0 +1,10 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "dependencies": {
+
+    "express":"2.14.7",
+    "body-parser": "1.15.0",
+    "cors": "2.7.1"
+  }
+}
