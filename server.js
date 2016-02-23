@@ -12,17 +12,21 @@ var app = express();
 //app.use(cors());
 
 
-var fs = require('fs');
+app.get('/getData', function (req, res) {
 
-fs.readFile('data/complex.json', function (err, logData) {
+    var fs = require('fs');
+    var json;
+    fs.readFile('data/complex.json', function (err, logData) {
 
-    if (err) throw err;
+        if (err) throw err;
+        json = JSON.parse(logData);
+        //json = logData.toString();
+        console.log(json);
+        res.send(json);
+    });
 
-    console.log(logData.toString());
 });
-/*app.get('data/complex.json', function (req, res) {
- res.send();
- });*/
+
 
 app.listen(8080, function () {
     //console.log('hello');
