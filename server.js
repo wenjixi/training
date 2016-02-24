@@ -28,13 +28,9 @@ function resalt() {
     var resalt = [];
     violation.forEach(function (item) {
         var temp = _.filter(db, function (elem) {
-            var check = false;
-            elem.cars.forEach(function (itemcar) {
-                if (check) return;
-                check = (itemcar.number == item.number);
-            });
-            return check;
+            return _.some(elem.cars, ['number', item.number]);
         });
+
         if (temp.length)(
             resalt.push(temp));
 
