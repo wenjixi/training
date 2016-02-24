@@ -3,29 +3,69 @@
  */
 
 var express = require('express');
-//var cors = require('cors');
-//var bodyParser = require('body-parser')
+var _ = require('lodash');
 var app = express();
+var fs = require('fs');
 
 
-//app.use(bodyParser());
-//app.use(cors());
+var db;
+var violation;
+
+fs.readFile('data/database.json', function (err, logData) {
+        if (err) throw err;
+        db = JSON.parse(logData);
+    }
+);
+
+fs.readFile('data/vialotaions.json', function (err, logData) {
+        if (err) throw err;
+        violation = JSON.parse(logData);
+    }
+);
+
+
+function resalt() {
+    var resalt = [];
+    violation.forEach(function (item) {
+        var temp = _.filter(db, function (elem) {
+            var check = false;
+            elem.cars.forEach(function (itemcar) {
+                if (check) return;
+                check = (itemcar.number == item.number);
+            });
+            return check;
+        });
+        if (temp.length)(
+            resalt.push(temp));
+
+    });
+
+    return resalt;
+}
 
 
 app.get('/getData', function (req, res) {
 
-    var fs = require('fs');
-    var json;
-    fs.readFile('data/complex.json', function (err, logData) {
-
-        if (err) throw err;
-        json = JSON.parse(logData);
-        //json = logData.toString();
-        console.log(json);
-        res.send(json);
-    });
+    res.send(resalt());
 
 });
+
+
+/*
+ var fs = require('fs');
+ var json;
+ fs.readFile('data/complex.json', function (err, logData) {
+
+ if (err) throw err;
+ json = JSON.parse(logData);
+ console.log(json);
+ });
+
+ app.get('/getData', function (req, res) {
+
+ res.send(json);
+ });
+ */
 
 
 app.listen(8080, function () {
