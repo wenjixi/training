@@ -24,16 +24,29 @@ fs.readFile('data/vialotaions.json', function (err, logData) {
 );
 
 
+/*function resalt() {
+ var resalt = [];
+ violation.forEach(function (item) {
+ var temp = _.filter(db, function (elem) {
+ return _.some(elem.cars, {'number': item.number});
+ });
+
+ if (temp.length)(
+ resalt.push(temp));
+
+ });
+
+ return resalt;
+ }*/
+
 function resalt() {
     var resalt = [];
-    violation.forEach(function (item) {
-        var temp = _.filter(db, function (elem) {
-            return _.some(elem.cars, ['number', item.number]);
+    db.forEach(function (item) {
+        item.cars.forEach(function (itemcar) {
+            var temp = _.filter(violation, {'number': itemcar.number});
+            if (temp.length)(
+                resalt.push(temp));
         });
-
-        if (temp.length)(
-            resalt.push(temp));
-
     });
 
     return resalt;
@@ -45,23 +58,6 @@ app.get('/getData', function (req, res) {
     res.send(resalt());
 
 });
-
-
-/*
- var fs = require('fs');
- var json;
- fs.readFile('data/complex.json', function (err, logData) {
-
- if (err) throw err;
- json = JSON.parse(logData);
- console.log(json);
- });
-
- app.get('/getData', function (req, res) {
-
- res.send(json);
- });
- */
 
 
 app.listen(8080, function () {
