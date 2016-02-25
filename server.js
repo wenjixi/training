@@ -23,35 +23,22 @@ fs.readFile('data/vialotaions.json', function (err, logData) {
     }
 );
 
-
-/*function resalt() {
- var resalt = [];
- violation.forEach(function (item) {
- var temp = _.filter(db, function (elem) {
- return _.some(elem.cars, {'number': item.number});
- });
-
- if (temp.length)(
- resalt.push(temp));
-
- });
-
- return resalt;
- }*/
-
 function resalt() {
     var resalt = [];
+    var mySet = new Set();
     db.forEach(function (item) {
         item.cars.forEach(function (itemcar) {
-            var temp = _.filter(violation, {'number': itemcar.number});
-            if (temp.length)(
-                resalt.push(temp));
-        });
+            mySet.add(itemcar.number);
+        })
+    });
+    violation.forEach(function (item) {
+        if (mySet.has(item.number)) {
+            resalt.push(item)
+        }
     });
 
     return resalt;
 }
-
 
 app.get('/getData', function (req, res) {
 
