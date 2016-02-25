@@ -25,14 +25,14 @@ fs.readFile('data/vialotaions.json', function (err, logData) {
 
 function resalt() {
     var resalt = [];
-    var mySet = new Set();
-    db.forEach(function (item) {
+    var myMap = new Map();
+       db.forEach(function (item) {
         item.cars.forEach(function (itemcar) {
-            mySet.add(itemcar.number);
+            myMap.set(itemcar.number, "number");
         })
     });
     violation.forEach(function (item) {
-        if (mySet.has(item.number)) {
+        if (myMap.has(item.number)) {
             resalt.push(item)
         }
     });
