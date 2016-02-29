@@ -40,7 +40,7 @@ function resalt() {
 }
 
 app.get('/getData', function (req, res) {
-
+    console.log('hi');
     res.send(resalt());
 
 });
