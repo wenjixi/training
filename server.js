@@ -40,10 +40,34 @@ function resalt() {
 }
 
 app.get('/getData', function (req, res) {
-    console.log('hi');
     res.send(resalt());
 
 });
+
+app.get('/', function (req, res) {
+
+    var options = {
+        root: __dirname + '/public/',
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+
+    res.sendFile('app/index.html', options, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(err.status).end();
+        }
+        else {
+            console.log('Sent:', fileName);
+        }
+    });
+
+});
+/*    res.send(app/index.html);
+});*/
 
 
 app.listen(8080, function () {
