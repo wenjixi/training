@@ -7,7 +7,6 @@ var _ = require('lodash');
 var app = express();
 var fs = require('fs');
 
-
 var db;
 var violation;
 
@@ -48,5 +47,4 @@ app.get('/getData', function (req, res) {
 
 
 app.listen(8080, function () {
-    //console.log('hello');
-});
+    });

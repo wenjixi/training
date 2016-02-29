@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server ./app -a localhost -p 8000 -c-1"
+  },
+  "dependencies": {
+    "angular": "1.5.0",
+    "bootstrap": "3.3.6",
+    "http-server": "^0.6.1"
+  }
+}
