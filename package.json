@@ -11,6 +11,6 @@
     "body-parser": "1.15.0",
     "cors": "2.7.1",
     "bower": "1.7.7",
-    "lo-dash":
+    "lo-dash": "4.5.1"
   }
 }
