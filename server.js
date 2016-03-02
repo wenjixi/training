@@ -45,6 +45,7 @@ app.get('/getData', function (req, res) {
 });
 
 app.use(express.static('public/app'));
+app.use('/data', express.static('data'));
 
 app.listen(8080, function () {
     });

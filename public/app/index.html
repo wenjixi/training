@@ -39,11 +39,24 @@
 
             <div class="content">
 
-                <h3>Page content</h3>
+                <div ng-controller="violationsCtrl">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon">Vialotaions Date</span>
+                        <input type="text" class="form-control" placeholder="greater than yyyy-mm-dd"
+                               ng-model="greaterThanDate"
+                               aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" placeholder="less than yyyy-mm-dd"
+                               ng-model="lessThanDate"
+                               aria-describedby="basic-addon2">
+                              <span class="input-group-addon input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="searchButton()">Go!</button>
+      </span>
+                    </div>
 
-                <p>same content</p>
-
-                <div ng-controller="helloCtrl">{{hello}}</div>
+                    <div ng-repeat="name in names">
+                        {{name}}
+                    </div>
+                </div>
 
             </div>
 
@@ -55,7 +68,8 @@
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="app.js"></script>
-<script src="controllers/helloCtrl.js"></script>
+<script src="controllers/violationsCtrl.js"></script>
+<script src="services/dataService.js"></script>
 </body>
 </html>
 
