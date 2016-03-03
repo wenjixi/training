@@ -4,10 +4,10 @@
 angular.module('appViolationsCtrl', [])
     .controller('violationsCtrl', ['$scope', 'dataService', function ($scope, dataService) {
         $scope.searchButton = function () {
-            var greaterThanDate = $scope.greaterThanDate;
-            var lessThanDate = $scope.lessThanDate;
+            var dateStart = $scope.dateStart;
+            var dateEnd = $scope.dateEnd;
             dataService.searchNameByDate(function (data) {
                 $scope.names = data;
-            }, greaterThanDate, lessThanDate)
+            }, dateStart, dateEnd)
         }
     }]);

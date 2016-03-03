@@ -6,6 +6,7 @@ var express = require('express');
 var _ = require('lodash');
 var app = express();
 var fs = require('fs');
+var bodyParser = require('body-parser');
 
 var db;
 var violation;
@@ -22,25 +23,59 @@ fs.readFile('data/vialotaions.json', function (err, logData) {
     }
 );
 
-function resalt() {
-    var resalt = [];
+function resultFn(dateStart, dateEnd) {
+    var result = new Map();
     var myMap = new Map();
-       db.forEach(function (item) {
+    db.forEach(function (item) {
         item.cars.forEach(function (itemcar) {
-            myMap.set(itemcar.number, "number");
+            myMap.set(itemcar.number, item.name);
+
         })
     });
+
     violation.forEach(function (item) {
-        if (myMap.has(item.number)) {
-            resalt.push(item)
+        if (myMap.has(item.number) && checkDate(item.vialotaionTime, dateStart, dateEnd)) {
+            result.set(myMap.get(item.number), item.vialotaionTime);
         }
     });
-
-    return resalt;
+    return Array.from(result);
 }
 
+function checkDate(checkDate, dateStart, dateEnd) {
+    if (dateStart || dateEnd) {
+        if (Date.parse(checkDate) >= Date.parse(dateStart)
+            && Date.parse(checkDate) <= Date.parse(dateEnd)) {
+            return true;
+        } else return false;
+    }
+    return true;
+}
+
+
+/*function resultFn() {
+ var result = [];
+ var myMap = new Map();
+ db.forEach(function (item) {
+ item.cars.forEach(function (itemcar) {
+ myMap.set(itemcar.number, "number");
+ })
+ });
+ violation.forEach(function (item) {
+ if (myMap.has(item.number)) {
+ result.push(item)
+ }
+ });
+
+ return result;
+ }*/
+
 app.get('/getData', function (req, res) {
-    res.send(resalt());
+    var dateStart = req.param('dateStart');
+    var dateEnd = req.param('dateEnd');
+    console.log(dateEnd);
+    console.log(dateStart);
+            res.send(resultFn(dateStart, dateEnd));
+
 
 });
 
@@ -48,4 +83,4 @@ app.use(express.static('public/app'));
 app.use('/data', express.static('data'));
 
 app.listen(8080, function () {
-    });
+});

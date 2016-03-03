@@ -4,7 +4,19 @@
  */
 angular.module('appDataService', [])
     .factory('dataService', ['$http', function serviceFactory($http) {
-        var newVar = {
+        return{
+            searchNameByDate:function (callback, dateStart, dateEnd) {
+                $http({
+                    method: 'GET',
+                    url: '/getData',
+                    data: {'dateStart' : dateStart,
+                            'dateEnd' : dateEnd}})
+                    .success(function (data) {
+                        return callback(data);
+                    })
+            }
+        };
+        /*var newVar = {
             database: function (callback) {
                 $http.get('data/database.json')
                     .success(function (data) {
@@ -60,5 +72,5 @@ angular.module('appDataService', [])
                     })
             }
         };
-        return newVar;
+        return newVar;*/
     }]);

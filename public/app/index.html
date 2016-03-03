@@ -42,11 +42,11 @@
                 <div ng-controller="violationsCtrl">
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon">Vialotaions Date</span>
-                        <input type="text" class="form-control" placeholder="greater than yyyy-mm-dd"
-                               ng-model="greaterThanDate"
+                        <input type="text" class="form-control" placeholder="Date Start yyyy-mm-dd"
+                               ng-model="dateStart"
                                aria-describedby="basic-addon1">
-                        <input type="text" class="form-control" placeholder="less than yyyy-mm-dd"
-                               ng-model="lessThanDate"
+                        <input type="text" class="form-control" placeholder="Date End yyyy-mm-dd"
+                               ng-model="dateEnd"
                                aria-describedby="basic-addon2">
                               <span class="input-group-addon input-group-btn">
         <button class="btn btn-default" type="button" ng-click="searchButton()">Go!</button>
