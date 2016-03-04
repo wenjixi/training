@@ -9,7 +9,7 @@ angular.module('appDataService', [])
                 $http({
                     method: 'GET',
                     url: '/getData',
-                    data: {'dateStart' : dateStart,
+                    params: {'dateStart' : dateStart,
                             'dateEnd' : dateEnd}})
                     .success(function (data) {
                         return callback(data);

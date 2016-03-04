@@ -32,31 +32,13 @@
 
         <div class="col-md-10">
             <ul class="nav nav-tabs">
-                <li><a href="#">ACTION1</a></li>
+                <li><a href="#/ViolationsLastMonth">Violations of the last month</a></li>
                 <li><a href="#">ACTION2</a></li>
                 <li><a href="#">ACTION3</a></li>
             </ul>
 
             <div class="content">
-
-                <div ng-controller="violationsCtrl">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon">Vialotaions Date</span>
-                        <input type="text" class="form-control" placeholder="Date Start yyyy-mm-dd"
-                               ng-model="dateStart"
-                               aria-describedby="basic-addon1">
-                        <input type="text" class="form-control" placeholder="Date End yyyy-mm-dd"
-                               ng-model="dateEnd"
-                               aria-describedby="basic-addon2">
-                              <span class="input-group-addon input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="searchButton()">Go!</button>
-      </span>
-                    </div>
-
-                    <div ng-repeat="name in names">
-                        {{name}}
-                    </div>
-                </div>
+                <div ui-view></div>
 
             </div>
 
@@ -67,9 +49,12 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/ui-router/release/angular-ui-router.js"></script>
 <script src="app.js"></script>
 <script src="controllers/violationsCtrl.js"></script>
+<script src="controllers/violationsLastMonthCtrl.js"></script>
 <script src="services/dataService.js"></script>
+
 </body>
 </html>
 
