@@ -1,12 +1,14 @@
-/**
+/*
+/!**
  * Created by Admin on 22.02.2016.
- */
+ *!/
 
+*/
 var express = require('express');
-var _ = require('lodash');
 var app = express();
 var fs = require('fs');
 var bodyParser = require('body-parser');
+
 
 var db;
 var violation;
@@ -51,30 +53,10 @@ function checkDate(checkDate, dateStart, dateEnd) {
     return true;
 }
 
-
-/*function resultFn() {
- var result = [];
- var myMap = new Map();
- db.forEach(function (item) {
- item.cars.forEach(function (itemcar) {
- myMap.set(itemcar.number, "number");
- })
- });
- violation.forEach(function (item) {
- if (myMap.has(item.number)) {
- result.push(item)
- }
- });
-
- return result;
- }*/
-
 app.get('/getData', function (req, res) {
     var dateStart = req.param('dateStart');
     var dateEnd = req.param('dateEnd');
-    console.log(dateEnd);
-    console.log(dateStart);
-            res.send(resultFn(dateStart, dateEnd));
+    res.send(resultFn(dateStart, dateEnd));
 
 
 });
@@ -83,4 +65,5 @@ app.use(express.static('public/app'));
 app.use('/data', express.static('data'));
 
 app.listen(8080, function () {
+    console.log('Example app listening on port 8080!');
 });
