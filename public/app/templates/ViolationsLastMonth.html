@@ -1,3 +1,16 @@
-<div ng-controller="ViolationsLastMonthCtrl" ng-repeat="name in names">
-    {{name}}
-</div>
+<table class="table" ng-controller="ViolationsLastMonthCtrl">
+    <thead>
+    <tr>
+        <th>Violations date:</th>
+        <th>Name:</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr  ng-repeat="name in names">
+        <td>{{name[0] | date:'medium'}}</td>
+        <td>{{name[1].name}}</td>
+        </tr>
+    </tbody>
+    </table>
+
+
