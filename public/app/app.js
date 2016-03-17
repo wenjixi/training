@@ -5,7 +5,10 @@ var myApp = angular.module('myApp', [
     'appViolationsCtrl',
     'ui.router',
     'appDataService',
-    'appViolationsLastMonthCtrl'
+    'appViolationsLastMonthCtrl',
+    'appSearchInputCtrl',
+    'appSearchInput',
+    'appSearchInputSuggestions'
 
 ]);
 
@@ -21,6 +24,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('ViolationsLastMonth', {
             url: '/ViolationsLastMonth',
             templateUrl: 'templates/ViolationsLastMonth.html',
-            controller: 'ViolationsLastMonthCtrl'
+            controller: 'violationsLastMonthCtrl'
+        })
+        .state('SearchInput', {
+            url: '/SearchInput',
+            templateUrl: 'templates/SearchInput.html',
+            controller: 'searchInputCtrl'
         })
 });
