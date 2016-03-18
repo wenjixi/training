@@ -13,9 +13,9 @@ var _ = require('lodash');
 
 var myMap = new Map();
 var violationInDatabase = new Map();
+var db;
 
 fs.readFile('data/database.json', function (err, logData) {
-        var db;
         if (err) throw err;
         db = JSON.parse(logData);
         db.forEach(function (item) {
@@ -57,6 +57,26 @@ function checkDate(checkDate, dateStart, dateEnd) {
     return true;
 }
 
+function getSuggestions(characters) {
+    var search = characters.toLowerCase();
+    var result = [];
+    db.forEach(function (item) {
+        if (item.name.toLowerCase().indexOf(search) + 1) {
+            result.push(item.name);
+        }
+        item.cars.forEach(function (itemcar) {
+            if (result.indexOf(itemcar.name.toLowerCase()) + 1 === 0) {
+                if (itemcar.name.toLowerCase().indexOf(search) + 1) {
+                    result.push(itemcar.name);
+                }
+            }
+        });
+
+    });
+    return result;
+}
+
+
 app.get('/getData', function (req, res) {
     var dateStart = req.param('dateStart');
     var dateEnd = req.param('dateEnd');
@@ -64,6 +84,14 @@ app.get('/getData', function (req, res) {
 
 
 });
+
+app.get('/getSuggestions', function (req, res) {
+    var inputCharacters = req.param('inputCharacters');
+    res.send(getSuggestions(inputCharacters));
+
+
+});
+
 
 app.use(express.static('public/app'));
 app.use('/data', express.static('data'));
