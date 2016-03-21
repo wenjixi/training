@@ -4,6 +4,7 @@
 var myApp = angular.module('myApp', [
     'appViolationsCtrl',
     'ui.router',
+    'ngSanitize',
     'appDataService',
     'appViolationsLastMonthCtrl',
     'appSearchInput',

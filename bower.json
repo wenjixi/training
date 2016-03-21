@@ -11,6 +11,7 @@
     "bootstrap": "3.3.6",
     "html5-boilerplate": "5.3.0",
     "ui-router": "*",
-    "json":"*"
+    "json": "*",
+    "angular-sanitize": "^1.5.2"
   }
 }
