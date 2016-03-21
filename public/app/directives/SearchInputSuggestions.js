@@ -7,7 +7,7 @@ angular.module('appSearchInputSuggestions', [])
                 require: "^searchInput",
                 link: function (scope, elements, attrs, searchInputCtrl) {
 
-                    var template = "<ul class='dropdown-menu' ng-show='showSuggestions' aria-labelledby='dropdownMenu1'><li ng-repeat='suggestion in suggestions'>{{suggestion}}</li></ul>";
+                    var template = "<ul class='dropdown-menu' ng-show='showSuggestions' aria-labelledby='dropdownMenu1'><li ng-repeat='suggestion in suggestions'><div ng-bind-html='suggestion | filterSuggestion:inputSuggestion'></div></li></ul>";
                     var linkFn = $compile(template);
                     var content = linkFn(scope);
                     $(content).appendTo($('.dropdown'));
@@ -23,22 +23,17 @@ angular.module('appSearchInputSuggestions', [])
                                 scope.suggestions = data;
                                 scope.inputSuggestion = value;
                             })
-
                         }
                     })
-
                 }
             }
         }
     )
-/*    .filter('filterSuggestion', function () {
-        param = "hon";
-        console.log("param " + param);
+    .filter('filterSuggestion', function ($sce) {
+        return function (str, param) {
+            param = param.toLowerCase();
+            str = "<span>" + str.substring(0, str.toLowerCase().indexOf(param)) + "</span><span id='green'>" + str.substring(str.toLowerCase().indexOf(param), str.toLowerCase().indexOf(param) + param.length) + "</span><span>" + str.substring(str.toLowerCase().indexOf(param) + param.length) + "</span>";
+            return $sce.trustAsHtml(str)};
 
-            return function (str) {
-                console.log("str " + str);
-                return str = "<span>str.substring(0,str.indexOf(param))</span><span id='green'>str.substring(str.indexOf(param),str.indexOf(param)+param.length)</span><span>str.substring(str.indexOf(param)+param.length)</span>";
-            };
-
-    })*/;
+    });
 
