@@ -7,7 +7,7 @@ angular.module('appSearchInputSuggestions', [])
                 require: "^searchInput",
                 link: function (scope, elements, attrs, searchInputCtrl) {
 
-                    var template = "<ul class='dropdown-menu' ng-show='showSuggestions' aria-labelledby='dropdownMenu1'><li ng-repeat='suggestion in suggestions'>{{suggestion | filterSuggestion:inputSuggestion}}</li></ul>";
+                    var template = "<ul class='dropdown-menu' ng-show='showSuggestions' aria-labelledby='dropdownMenu1'><li ng-repeat='suggestion in suggestions'>{{suggestion}}</li></ul>";
                     var linkFn = $compile(template);
                     var content = linkFn(scope);
                     $(content).appendTo($('.dropdown'));
@@ -31,14 +31,14 @@ angular.module('appSearchInputSuggestions', [])
             }
         }
     )
-    .filter('filterSuggestion', function () {
+/*    .filter('filterSuggestion', function () {
         param = "hon";
         console.log("param " + param);
 
             return function (str) {
                 console.log("str " + str);
-                return str = "<span>str.substring(0,str.indexOf(param))</span><span id='red'>str.substring(str.indexOf(param),str.indexOf(param)+param.length)</span><span>str.substring(str.indexOf(param)+param.length)</span>";
+                return str = "<span>str.substring(0,str.indexOf(param))</span><span id='green'>str.substring(str.indexOf(param),str.indexOf(param)+param.length)</span><span>str.substring(str.indexOf(param)+param.length)</span>";
             };
 
-    });
+    })*/;
 

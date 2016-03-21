@@ -6,7 +6,6 @@ var myApp = angular.module('myApp', [
     'ui.router',
     'appDataService',
     'appViolationsLastMonthCtrl',
-    'appSearchInputCtrl',
     'appSearchInput',
     'appSearchInputSuggestions'
 
@@ -21,14 +20,13 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'violationsCtrl'
         })
 
-        .state('ViolationsLastMonth', {
-            url: '/ViolationsLastMonth',
-            templateUrl: 'templates/ViolationsLastMonth.html',
+        .state('violationsLastMonth', {
+            url: '/violationsLastMonth',
+            templateUrl: 'templates/violationsLastMonth.html',
             controller: 'violationsLastMonthCtrl'
         })
-        .state('SearchInput', {
-            url: '/SearchInput',
-            templateUrl: 'templates/SearchInput.html',
-            controller: 'searchInputCtrl'
+        .state('searchInput', {
+            url: '/searchInput',
+            templateUrl: 'templates/searchInput.html'
         })
 });
