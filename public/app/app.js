@@ -8,7 +8,8 @@ var myApp = angular.module('myApp', [
     'appDataService',
     'appViolationsLastMonthCtrl',
     'appSearchInput',
-    'appSearchInputSuggestions'
+    'appSearchInputSuggestions',
+    'appTrainingJquery'
 
 ]);
 
@@ -29,5 +30,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('searchInput', {
             url: '/searchInput',
             templateUrl: 'templates/searchInput.html'
+        })
+        .state('jquery', {
+            url: '/jquery',
+            templateUrl: 'templates/jquery.html'
         })
 });

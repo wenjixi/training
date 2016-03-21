@@ -18,17 +18,17 @@ angular.module('appDataService', [])
                         return callback(data);
                     })
             },
-            searchSuggestions: function (inputCharacters, callback) {$http({
-                method: 'GET',
-                url: '/getSuggestions',
-                params: {
-                    'inputCharacters': inputCharacters
-                }
-            })
-                .success(function (data) {
-                    return callback(data);
+            searchSuggestions: function (inputCharacters, callback) {
+                $http({
+                    method: 'GET',
+                    url: '/getSuggestions',
+                    params: {
+                        'inputCharacters': inputCharacters
+                    }
                 })
+                    .success(function (data) {
+                        return callback(data);
+                    })
             }
-
         };
     }]);
