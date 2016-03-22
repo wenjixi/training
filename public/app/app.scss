@@ -1,7 +1,23 @@
 $navTextColor: white;
 $navHeadColor: #18af7b;
+$gray-lighter: #eee;
+$text-indent: 12px;
+
 
 .green, th {
   background-color: $navHeadColor;
   color: $navTextColor;
+}
+
+.dropdown-menu {
+    width: 100%;
+}
+
+.dropdown-menu {
+  text-indent: $text-indent;
+}
+
+.dropdown-menu li:hover{
+  background-color: $gray-lighter;
+  padding-left: 0;
 }

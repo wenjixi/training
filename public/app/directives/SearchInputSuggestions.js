@@ -4,10 +4,13 @@
 angular.module('appSearchInputSuggestions', [])
     .directive('searchInputSuggestions', function ($compile, dataService) {
             return {
+                scope:{
+                    selectionSuggestion: '&'
+                },
                 require: "^searchInput",
                 link: function (scope, elements, attrs, searchInputCtrl) {
 
-                    var template = "<ul class='dropdown-menu' ng-show='showSuggestions' aria-labelledby='dropdownMenu1'><li ng-repeat='suggestion in suggestions'><div ng-bind-html='suggestion | filterSuggestion:inputSuggestion'></div></li></ul>";
+                    var template = "<ul class='dropdown-menu' ng-show='showSuggestions' aria-labelledby='dropdownMenu1'><li ng-repeat='suggestion in suggestions' ng-bind-html='suggestion | filterSuggestion:inputSuggestion' ng-click='selectionSuggestion(suggestion)'></li></ul>";
                     var linkFn = $compile(template);
                     var content = linkFn(scope);
                     $(content).appendTo($('.dropdown'));

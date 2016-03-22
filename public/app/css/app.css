@@ -1,5 +1,13 @@
 .green, th {
-    background-color: #18af7b;
-    color: white;
-}
+  background-color: #18af7b;
+  color: white; }
 
+.dropdown-menu {
+  width: 100%; }
+
+.dropdown-menu {
+  text-indent: 12px; }
+
+.dropdown-menu li:hover {
+  background-color: #eee;
+  padding-left: 0; }
