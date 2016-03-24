@@ -60,20 +60,43 @@ function checkDate(checkDate, dateStart, dateEnd) {
 function getSuggestions(characters) {
     var search = characters.toLowerCase();
     var result = [];
+    resaltDates = [];
     db.forEach(function (item) {
         if (item.name.toLowerCase().indexOf(search) + 1) {
             result.push(item.name);
+
         }
         item.cars.forEach(function (itemcar) {
             if (result.indexOf(itemcar.name.toLowerCase()) + 1 === 0) {
                 if (itemcar.name.toLowerCase().indexOf(search) + 1) {
                     result.push(itemcar.name);
+
                 }
             }
-        });
 
+        })
     });
     return result;
+}
+
+function getSearchInputDates(characters) {
+    var search = characters.toLowerCase();
+    var resultDates = [];
+    db.forEach(function (item) {
+        if (!~_.indexOf(resultDates, item)) {
+            if (item.name.toLowerCase().indexOf(search) + 1) {
+                resultDates.push(item);
+            }
+        }
+        item.cars.forEach(function (itemcar) {
+            if (!~_.indexOf(resultDates, item)) {
+                if (itemcar.name.toLowerCase().indexOf(search) + 1) {
+                    resultDates.push(item);
+                }
+            }
+        })
+    });
+    return resultDates;
 }
 
 
@@ -81,15 +104,16 @@ app.get('/getData', function (req, res) {
     var dateStart = req.param('dateStart');
     var dateEnd = req.param('dateEnd');
     res.send(resultFn(dateStart, dateEnd));
-
-
 });
 
 app.get('/getSuggestions', function (req, res) {
     var inputCharacters = req.param('inputCharacters');
     res.send(getSuggestions(inputCharacters));
+});
 
-
+app.get('/getSearchInputDates', function (req, res) {
+    var searchInput = req.param('searchInput');
+    res.send(getSearchInputDates(searchInput));
 });
 
 

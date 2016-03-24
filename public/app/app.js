@@ -4,13 +4,14 @@
 var myApp = angular.module('myApp', [
     'appViolationsCtrl',
     'ui.router',
+    'ui.bootstrap',
     'ngSanitize',
     'appDataService',
     'appViolationsLastMonthCtrl',
     'appSearchInput',
     'appSearchInputSuggestions',
     'appTrainingJquery',
-    'appInputSuggestionsCtrl'
+    'appSearchInputCtrl'
 
 ]);
 
@@ -31,7 +32,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('searchInput', {
             url: '/searchInput',
             templateUrl: 'templates/searchInput.html',
-            controller: 'inputSuggestionsCtrl'
+            controller: 'searchInputCtrl'
         })
         .state('jquery', {
             url: '/jquery',

@@ -29,6 +29,18 @@ angular.module('appDataService', [])
                     .success(function (data) {
                         return callback(data);
                     })
+            },
+            getSearchInputDates: function (searchInput, callback) {
+                $http({
+                    method: 'GET',
+                    url: '/getSearchInputDates',
+                    params: {
+                        'searchInput': searchInput
+                    }
+                })
+                    .success(function (data) {
+                        return callback(data);
+                    })
             }
         };
     }]);
