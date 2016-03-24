@@ -1,0 +1,26 @@
+<search-inputs search-input="searchInput" search-button="searchButton()" search-input-suggestions=""></search-inputs>
+<table class="table" ng-show="start">
+    <thead>
+    <tr>
+        <th>Guid</th>
+        <th>Age</th>
+        <th>Eye Color</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Cars</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="dataItem in dates">
+        <td ng-repeat="field in dataItem" ng-if="field!=dataItem.cars">{{field}}
+        </td>
+        <td >
+            <ol>
+                <li ng-repeat="car in dataItem.cars"> <span ng-repeat="item in car"> {{item}}</span> </li>
+            </ol>
+        </td>
+    </tr>
+    </tbody>
+</table>

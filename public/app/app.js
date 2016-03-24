@@ -31,7 +31,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('searchInput', {
             url: '/searchInput',
-            templateUrl: 'templates/searchInput.html',
+            templateUrl: 'templates/searchInput1.html',
             controller: 'searchInputCtrl'
         })
         .state('jquery', {
