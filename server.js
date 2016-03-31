@@ -63,14 +63,19 @@ function getSuggestions(characters) {
     resaltDates = [];
     db.forEach(function (item) {
         if (item.name.toLowerCase().indexOf(search) + 1) {
-            result.push(item.name);
+            result.push({
+                suggestion: item.name,
+                typeSuggestion: "name"
+            });
 
         }
         item.cars.forEach(function (itemcar) {
-            if (result.indexOf(itemcar.name.toLowerCase()) + 1 === 0) {
+            if (!_.find(result, ['suggestion', itemcar.name])) {
                 if (itemcar.name.toLowerCase().indexOf(search) + 1) {
-                    result.push(itemcar.name);
-
+                    result.push({
+                        suggestion: itemcar.name,
+                        typeSuggestion: "car"
+                    });
                 }
             }
 
@@ -100,6 +105,22 @@ function getSearchInputDates(characters) {
 }
 
 
+function getSearchModelNames(model) {
+    console.log(model);
+    var result = [];
+    db.forEach(function (item) {
+        item.cars.forEach(function (itemcar) {
+            if (!~_.indexOf(result, item.name)) {
+                if (itemcar.name.indexOf(model) + 1) {
+                    result.push(item);
+                }
+            }
+        })
+    });
+    console.log(result);
+    return result;
+}
+
 app.get('/getData', function (req, res) {
     var dateStart = req.param('dateStart');
     var dateEnd = req.param('dateEnd');
@@ -116,8 +137,14 @@ app.get('/getSearchInputDates', function (req, res) {
     res.send(getSearchInputDates(searchInput));
 });
 
+app.get('/getSearchModelNames', function (req, res) {
+ var model = req.param('model');
+ res.send(getSearchModelNames(model));
+ });
+
 
 app.use(express.static('public/app'));
+app.use('/node_modules/lodash', express.static('node_modules/lodash'));
 app.use('/data', express.static('data'));
 
 app.listen(8080, function () {

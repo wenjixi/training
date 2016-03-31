@@ -2,7 +2,7 @@ $navTextColor: white;
 $navHeadColor: #18af7b;
 $gray-lighter: #eee;
 $text-indent: 12px;
-
+$size-icon: 1.2em;
 
 .green, th {
   background-color: $navHeadColor;
@@ -10,14 +10,30 @@ $text-indent: 12px;
 }
 
 .dropdown-menu {
-    width: 100%;
+  width: 100%;
 }
 
 .dropdown-menu {
   text-indent: $text-indent;
+  li:hover {
+    background-color: $gray-lighter;
+    padding-left: 0;
+  }
 }
 
-.dropdown-menu li:hover{
-  background-color: $gray-lighter;
-  padding-left: 0;
+li img, button img {
+  width: $size-icon;
+  height: $size-icon;
+  margin-right: 1em;
+}
+
+div.input-group-btn {
+  button:hover {
+    background: none;
+    text-shadow: none;
+  }
+  a:hover {
+    text-decoration: none;
+    color: $navHeadColor;
+  }
 }

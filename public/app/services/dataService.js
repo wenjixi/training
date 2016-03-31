@@ -18,7 +18,7 @@ angular.module('appDataService', [])
                         return callback(data);
                     })
             },
-            searchSuggestions: function (inputCharacters, callback) {
+            getSuggestions: function (inputCharacters, callback) {
                 $http({
                     method: 'GET',
                     url: '/getSuggestions',
@@ -41,6 +41,18 @@ angular.module('appDataService', [])
                     .success(function (data) {
                         return callback(data);
                     })
-            }
+            },
+            getSearchModelNames: function(model, callback) {
+                $http({
+                    method: 'GET',
+                    url: '/getSearchModelNames',
+                    params: {
+                        'model': model
+                    }
+                })
+                    .success(function (data) {
+                        return callback(data);
+                    })
+            },
         };
     }]);

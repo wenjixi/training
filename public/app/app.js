@@ -7,6 +7,7 @@ var myApp = angular.module('myApp', [
     'ui.bootstrap',
     'ngSanitize',
     'appDataService',
+    'appSuggestionService',
     'appViolationsLastMonthCtrl',
     'appSearchInput',
     'appSearchInputSuggestions',

@@ -8,9 +8,17 @@ angular.module('appSearchInput', [])
                 searchInput: "=",
                 searchButton: "&"
             },
-            template: "<div class='panel'><div class='dropdown input-group' uib-dropdown is-open='showSuggestions'><input class='form-control' id='dropdownMenu1' type='text' ng-model='searchInput' /><span class='input-group-btn'><button class='btn btn-default' ng-click='searchButton()'>Search</button></span></div></div>",
+            templateUrl: 'templates/searchInputsDirectiveTamplate.html',
             controller: function ($scope) {
-                $scope.showSuggestions = false;
+                $scope.delModels = function (model) {
+                    _.pull($scope.models, model)
+                };
+
+                $scope.models = [];
+                this.addModels = function (model) {
+                    $scope.models.push(model);
+                };
+
                 this.getSearchInput = function () {
                     return $scope.searchInput;
                 };
@@ -18,10 +26,6 @@ angular.module('appSearchInput', [])
                 this.setSelectSuggestion = function (value) {
                     $scope.searchInput = value;
                 };
-
-                this.setShowSuggestions = function(value){
-                    $scope.showSuggestions = value;
-                }
             }
         }
     });

@@ -2,38 +2,52 @@
  * Created by Admin on 10.03.2016.
  */
 angular.module('appSearchInputSuggestions', [])
-    .directive('searchInputSuggestions', function ($compile, dataService) {
+    .directive('searchInputSuggestions', function ($compile, suggestionService) {
             return {
                 require: "^searchInputs",
                 link: function (scope, elements, attrs, searchInputDirectiveCtrl) {
 
-                    var template = "<ul class='dropdown-menu' uib-dropdown-menu aria-labelledby='dropdownMenu1'><li ng-repeat='suggestion in suggestions' ng-bind-html='suggestion | filterSuggestion:inputSuggestion' ng-click='selectionSuggestion(suggestion)'></li></ul>";
+                    var template = "<div class='dropdown open' uib-dropdown is-open='setShowSuggestions'><ul class='dropdown-menu' uib-dropdown-menu><li ng-repeat='suggestion in suggestions' ng-bind-html='suggestion.suggestion | filterSuggestion:inputSuggestion | filterIcon:suggestion.typeSuggestion:suggestion.suggestion'  ng-click='selectionSuggestion(suggestion)'></li></ul></div>";
                     var linkFn = $compile(template);
                     var content = linkFn(scope);
-                    $(content).appendTo($('.dropdown'));
+                    $(content).appendTo($('.panel'));
 
                     var charactersCount = 3;
                     scope.$watch(function () {
                         return searchInputDirectiveCtrl.getSearchInput();
                     }, function (value) {
-                        if (!value){scope.flag = false;
-                            return;}
-                        if (scope.flag){
-                            searchInputDirectiveCtrl.setShowSuggestions(false);
+                        if (!value)
+                            return;
+
+                        if (scope.flagNoShowSuggestions) {
+                            scope.setShowSuggestions = false;
+                            scope.flagNoShowSuggestions = false;
                             return;
                         }
+
                         if (value.length >= charactersCount) {
-                            searchInputDirectiveCtrl.setShowSuggestions(true);
-                            dataService.searchSuggestions(value, function (data) {
+                            scope.setShowSuggestions = true;
+                            suggestionService.searchSuggestions(value, function (data) {
                                 scope.suggestions = data;
-                                scope.inputSuggestion = value;
-                            })
-                        } else searchInputDirectiveCtrl.setShowSuggestions(false);
+
+                            });
+                            scope.inputSuggestion = value;
+                        } else scope.setShowSuggestions = false;
                     });
+
                     scope.selectionSuggestion = function (suggestion) {
-                        searchInputDirectiveCtrl.setSelectSuggestion(suggestion);
-                        scope.flag = true;
-                    }
+                        if (suggestion.typeSuggestion == "car") {
+                            var model = {
+                                model: suggestion.suggestion,
+                                img: "/data/icons/cars/" + suggestion.suggestion + ".png"
+                            };
+                            searchInputDirectiveCtrl.addModels(model);
+                        }
+                        searchInputDirectiveCtrl.setSelectSuggestion(suggestion.suggestion);
+                        scope.flagNoShowSuggestions = true;
+                    };
+
+
                 }
             }
         }
@@ -45,5 +59,17 @@ angular.module('appSearchInputSuggestions', [])
             return $sce.trustAsHtml(str)
         };
 
-    });
+    })
+    .filter('filterIcon', function ($sce) {
+        return function (str, type, value) {
+            if (type == "name") {
+                str = "<img src='/data/icons/man.png' />" + str;
+            } else
+                str = "<img src='/data/icons/cars/" + value + ".png' />" + str;
+            return $sce.trustAsHtml(str)
+
+        };
+
+    })
+;
 
