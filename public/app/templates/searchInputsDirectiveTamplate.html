@@ -4,7 +4,7 @@
             <button ng-repeat='model in models' type='button' class='btn btn-default'><img ng-attr-src={{model.img}} /><a
                     href='' ng-click='delModels(model)'>x</a></button>
         </div>
-        <input class='form-control' id='dropdownMenu1' type='text' ng-model='searchInput'/><span
+        <input class='form-control' type='text' ng-model='searchInput'/><span
             class='input-group-btn'><button class='btn btn-default' ng-click='searchButton({models:models})'>Search</button></span>
     </div>
 </div>

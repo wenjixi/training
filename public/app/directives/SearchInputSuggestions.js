@@ -19,11 +19,11 @@ angular.module('appSearchInputSuggestions', [])
                         if (!value)
                             return;
 
-                        if (scope.flagNoShowSuggestions) {
+                       /* if (scope.flagNoShowSuggestions) {
                             scope.setShowSuggestions = false;
                             scope.flagNoShowSuggestions = false;
                             return;
-                        }
+                        }*/
 
                         if (value.length >= charactersCount) {
                             scope.setShowSuggestions = true;
@@ -44,7 +44,7 @@ angular.module('appSearchInputSuggestions', [])
                             searchInputDirectiveCtrl.addModels(model);
                         }
                         searchInputDirectiveCtrl.setSelectSuggestion(suggestion.suggestion);
-                        scope.flagNoShowSuggestions = true;
+                        scope.setShowSuggestions = false;
                     };
 
 

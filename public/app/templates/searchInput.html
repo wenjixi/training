@@ -13,12 +13,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="dataItem in dates">
-        <td ng-repeat="field in dataItem" ng-if="field!=dataItem.cars">{{field}}
+    <tr ng-repeat="driver in driversData">
+        <td ng-repeat="field in driver" ng-if="field!=driver.cars">{{field}}
         </td>
         <td >
             <ol>
-                <li ng-repeat="car in dataItem.cars"> <span ng-repeat="item in car"> {{item}}</span> </li>
+                <li ng-repeat="car in driver.cars"> <span ng-repeat="item in car"> {{item}}</span> </li>
             </ol>
         </td>
     </tr>
