@@ -5,26 +5,38 @@ angular.module('appSearchInputCtrl', [])
     .controller('searchInputCtrl', ['$scope', 'dataService', function ($scope, dataService) {
         $scope.searchButton = function (models) {
             $scope.driversData = [];
-            if (models.length && (!_.find(models, ['model', $scope.searchInput]))) {
-                var uniqueModels = _.uniq(models);
+            var promiseArray = [];
+            if (models.length) {
+                var uniqueModels = _.uniqBy(models, "model");
                 uniqueModels.forEach(function (model) {
-                    dataService.getSearchModelNames(model.model, function (data) {
-                        var search = $scope.searchInput.toLowerCase();
-                        data.forEach(function (item) {
-                            if (!~_.indexOf($scope.driversData, item)) {
+                    var promise = new Promise(function (resolve, reject) {
+                        dataService.getSearchModelNames(model.model, function (data) {
+                            var search = $scope.searchInput.toLowerCase();
+                            data.forEach(function (item) {
                                 if (item.name.toLowerCase().indexOf(search) + 1) {
                                     $scope.driversData.push(item);
                                 }
-                            }
+                            });
+                            $scope.start = true;
+                            resolve();
                         });
-                        $scope.start = true;
+                    });
+                    promiseArray.push(promise);
+                });
+                Promise.all(promiseArray).then(function () {
+                    $scope.$apply(function () {
+                        $scope.driversData = _.uniqBy($scope.driversData, "name");
                     })
                 })
-            } else {
+            }
+            else {
                 dataService.getSearchInputDates($scope.searchInput, function (data) {
                     $scope.driversData = data;
                     $scope.start = true;
                 })
             }
+
         }
-    }]);
+    }
+    ])
+;

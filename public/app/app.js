@@ -7,12 +7,14 @@ var myApp = angular.module('myApp', [
     'ui.bootstrap',
     'ngSanitize',
     'appDataService',
+    'appFilterSuggestion',
     'appSuggestionService',
     'appViolationsLastMonthCtrl',
     'appSearchInput',
     'appSearchInputSuggestions',
     'appTrainingJquery',
-    'appSearchInputCtrl'
+    'appSearchInputCtrl',
+    'appIconsSuggestion'
 
 ]);
 
