@@ -14,7 +14,8 @@ var myApp = angular.module('myApp', [
     'appSearchInputSuggestions',
     'appTrainingJquery',
     'appSearchInputCtrl',
-    'appIconsSuggestion'
+    'appIconsSuggestion',
+    'appSearchInputService'
 
 ]);
 

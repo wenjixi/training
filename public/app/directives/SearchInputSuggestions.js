@@ -10,7 +10,6 @@ angular.module('appSearchInputSuggestions', [])
                 var template = "<div class='dropdown open' uib-dropdown is-open='setShowSuggestions'><ul class='dropdown-menu' uib-dropdown-menu><li ng-repeat='suggestion in suggestions' ng-click='selectionSuggestion(suggestion)'><icons-suggestion></icons-suggestion><span ng-bind-html='suggestion.suggestion | filterSuggestion:inputSuggestion'></span></span></li></ul></div>";
                 var linkFn = $compile(template);
                 var content = linkFn(scope);
-                // $(content).appendTo($('.panel'));
                 elements.children(0).append($(content));
                 var charactersCount = 3;
                 scope.$watch(function () {
@@ -46,16 +45,5 @@ angular.module('appSearchInputSuggestions', [])
     }
     ]);
 
-/*   .filter('filterIcon', function ($sce) {
- return function (str, type, value) {
- if (type == "name") {
- str = "<img src='/data/icons/man.png' />" + str;
- } else
- str = "<img src='/data/icons/cars/" + value + ".png' />" + str;
- return $sce.trustAsHtml(str)
 
- };
-
- })
- ;*/
 

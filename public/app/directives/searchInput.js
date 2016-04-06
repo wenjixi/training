@@ -9,7 +9,16 @@ angular.module('appSearchInput', [])
                 searchButton: "&"
             },
             templateUrl: 'templates/searchInputsDirectiveTamplate.html',
-            controller: function ($scope) {
+            controller: function ($scope, $element) {
+
+                $element.find('input').get(0).addEventListener('focus', function () {
+                    $element.find('div').get(0).classList.add('focused');
+                }, true);
+
+                $element.find('input').get(0).addEventListener("blur", function () {
+                    $element.find('div').get(0).classList.remove('focused');
+                }, true);
+
                 $scope.delModels = function (model) {
                     _.pull($scope.models, model)
                 };
