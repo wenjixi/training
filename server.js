@@ -13,6 +13,7 @@ var _ = require('lodash');
 
 var myMap = new Map();
 var violationInDatabase = new Map();
+var violationInDataBaseMassive = [];
 var db;
 
 fs.readFile('data/database.json', function (err, logData) {
@@ -34,6 +35,7 @@ fs.readFile('data/vialotaions.json', function (err, logData) {
         violation.forEach(function (item) {
             if (myMap.has(item.number)) {
                 violationInDatabase.set(item.vialotaionTime, myMap.get(item.number));
+                violationInDataBaseMassive.push(item);
             }
         });
     }
@@ -104,9 +106,7 @@ function getSearchInputDates(characters) {
     return resultDates;
 }
 
-
 function getSearchModelNames(model) {
-    console.log(model);
     var result = [];
     db.forEach(function (item) {
         item.cars.forEach(function (itemcar) {
@@ -117,9 +117,26 @@ function getSearchModelNames(model) {
             }
         })
     });
-    console.log(result);
     return result;
 }
+
+function getDetailsByGuid(guid) {
+    var driver = {};
+    var driverDb = _.find(db, ['guid', guid]);
+    for (var key in driverDb) {
+        driver[key] = driverDb[key];
+    }
+    var violations = [];
+    driver.cars.forEach(function (car) {
+        var violationForCar = _.filter(violationInDataBaseMassive, ['number', car.number]);
+        for (var key in violationForCar) {
+            violations.push(violationForCar[key])
+        }
+    });
+    driver.violations = violations;
+    return driver;
+}
+
 
 app.get('/getData', function (req, res) {
     var dateStart = req.param('dateStart');
@@ -138,10 +155,14 @@ app.get('/getSearchInputDates', function (req, res) {
 });
 
 app.get('/getSearchModelNames', function (req, res) {
- var model = req.param('model');
- res.send(getSearchModelNames(model));
- });
+    var model = req.param('model');
+    res.send(getSearchModelNames(model));
+});
 
+app.get('/getDetailsByGuid', function (req, res) {
+    var guid = req.param('guid');
+    res.send(getDetailsByGuid(guid));
+});
 
 app.use(express.static('public/app'));
 app.use('/node_modules/lodash', express.static('node_modules/lodash'));

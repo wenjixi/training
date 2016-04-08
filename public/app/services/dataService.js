@@ -42,7 +42,7 @@ angular.module('appDataService', [])
                         return callback(data);
                     })
             },
-            getSearchModelNames: function(model, callback) {
+            getSearchModelNames: function (model, callback) {
                 $http({
                     method: 'GET',
                     url: '/getSearchModelNames',
@@ -54,5 +54,29 @@ angular.module('appDataService', [])
                         return callback(data);
                     })
             },
+            getDetailsByGuid: function (guid, callback) {
+                $http({
+                    method: 'GET',
+                    url: '/getDetailsByGuid',
+                    params: {
+                        'guid': guid
+                    }
+                })
+                    .success(function (data) {
+                        return callback(data);
+                    })
+            },
+            getViolationByNumber: function (numbers, callback) {
+                $http({
+                    method: 'GET',
+                    url: '/getViolationByNumber',
+                    params: {
+                        'numbers': numbers
+                    }
+                })
+                    .success(function (data) {
+                        return callback(data);
+                    })
+            }
         };
     }]);

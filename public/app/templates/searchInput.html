@@ -2,10 +2,10 @@
 <table class="table" ng-if="showDataTable">
     <thead>
     <tr>
+        <th>Name</th>
         <th>Guid</th>
         <th>Age</th>
         <th>Eye Color</th>
-        <th>Name</th>
         <th>Gender</th>
         <th>Phone</th>
         <th>Address</th>
@@ -14,7 +14,9 @@
     </thead>
     <tbody>
     <tr ng-repeat="driver in driversData">
-        <td ng-repeat="field in driver" ng-if="field!=driver.cars">{{field}}
+        <td><a ng-attr-href="#/detail/{{driver.guid}}" class="ng-binding">{{driver.name}}</a>
+        </td>
+        <td ng-repeat="field in driver" ng-if="field!=driver.cars && field!=driver.name">{{field}}
         </td>
         <td >
             <ol>

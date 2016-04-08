@@ -15,7 +15,6 @@ angular.module('appSearchInputCtrl', [])
             }
             else {
                 searchInputService.searchBySearchInput($scope.searchInput, function (data) {
-
                     $scope.driversData = data;
 
                 })

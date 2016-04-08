@@ -1,0 +1,64 @@
+<div class="col-md-4">
+    <div class="well">
+        <h3>User Information</h3>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <td>{{driver.name}}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{driver.age}}</td>
+            </tr>
+            <tr>
+                <th>Eye Color</th>
+                <td>{{driver.eyeColor}}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{driver.gender}}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{driver.phone}}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{driver.address}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="col-md-5">
+    <div class="well">
+        <h3>Violations</h3>
+        <table class="table">
+            <tr>
+                <th>Namber Car</th>
+                <th>Speed</th>
+                <th>Over Speed</th>
+                <th>Vialotaion Time</th>
+            </tr>
+            <tr ng-repeat="violation in driver.violations" >
+                <td >{{violation.number}}</td>
+                <td >{{violation.speed}}</td>
+                <td>{{violation.overSpeed}}</td>
+                <td>{{violation.vialotaionTime}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="well">
+        <h3>Cars</h3>
+        <table class="table">
+            <tr>
+                <th>Model</th>
+                <th>Number</th>
+            </tr>
+            <tr ng-repeat="car in driver.cars">
+                <td>{{car.name}}</td>
+                <td>{{car.number}}</td>
+            </tr>
+    </div>
+</div>
